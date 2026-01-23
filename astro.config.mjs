@@ -18,7 +18,7 @@ export default defineConfig({
   keystatic(), markdoc()],
 
   // 3. Importante: Para que Keystatic funcione bien en producción
-  output: 'hybrid',
+  output: 'server',
 
   adapter: vercel(),
 });
