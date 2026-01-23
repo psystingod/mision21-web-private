@@ -1,0 +1,374 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+
+// Import images
+import AboutHeroImage1 from '../assets/members1.jpeg';
+import AboutHeroImage2 from '../assets/members2.jpeg'; 
+---
+
+<Layout
+    title="Who We Are"
+    description="Learn about the history, mission, and team behind Mision 21"
+    pubDate={new Date('January 05 2025')}
+>
+
+    <div class="hero-carousel-container">
+        <div class="carousel-slide active fade">
+            <img src={AboutHeroImage1.src} alt="Mission 21 Team" />
+        </div>
+
+        <div class="carousel-slide fade">
+            <img src={AboutHeroImage2.src} alt="Mission 21 Community" />
+        </div>
+    </div>
+
+    <section class="intro-section mobile-centered">
+        <div class="mission-header">
+            <h2>Our History</h2>
+            <div class="text-content">
+                <p class="lead-text">
+                    <strong>Mision 21</strong> was born from a dream: to reclaim our communities.
+                </p>
+                <p>
+                    It all began with the vision of our founder, <strong>Luis Satoshi</strong>, who yearned to find a real and tangible way to reach those territories that, for years, were dominated by violence and gangs. His desire was not just to enter, but to transform: to restore hope and freedom to those who had lived in fear.
+                </p>
+                <p>
+                    Today, that vision is a reality. Mision 21 works actively to bring <strong>financial freedom</strong> through Bitcoin, teach <strong>Christian values</strong> that restore the spirit, and promote sports through <strong>soccer schools</strong>, allowing children and youth to exchange environments of violence for spaces of recreation and healthy growth.
+                </p>
+            </div>
+        </div>
+
+        <div class="pillars-container">
+            <div class="pillar">
+                <i class="fa-brands fa-bitcoin"></i>
+                <h4>Financial Freedom</h4>
+            </div>
+            <div class="pillar">
+                <i class="fa-solid fa-cross"></i>
+                <h4>Christian Values</h4>
+            </div>
+            <div class="pillar">
+                <i class="fa-solid fa-futbol"></i>
+                <h4>Sports and Prevention</h4>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="team-section mobile-centered">
+        <h2>Our Leadership</h2>
+        <p class="team-intro">
+            Behind every action is a team committed to operational and spiritual excellence, structured to ensure long-term impact.
+        </p>
+
+        <h3 class="team-category">Board of Directors and Executives</h3>
+        
+        <div class="team-wrapper">
+            <div class="team-card">
+                <div class="card-content">
+                    <h4>Luis Satoshi</h4>
+                    <span class="role">Founder & Chief Visionary Officer (CVO)</span>
+                    <p>
+                        He is the moral and strategic compass of the organization. His role is to safeguard the foundational philosophy and project the future of the mission.
+                    </p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="card-content">
+                    <h4>Irving</h4>
+                    <span class="role">Chief Operating Officer (COO)</span>
+                    <p>
+                        The principal executor of the vision. He is in charge of operational excellence, ensuring the organization runs with precision and efficiency.
+                    </p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="card-content">
+                    <h4>Diego</h4>
+                    <span class="role">Chief Technology & Innovation Officer (CTO)</span>
+                    <p>
+                        He leads the digital transformation, managing everything from Bitcoin mining operations to the formalization of educational alliances.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="team-category">Area Directors</h3>
+        
+        <div class="team-wrapper">
+            <div class="team-card">
+                <div class="card-content">
+                    <h4>Maricela</h4>
+                    <span class="role">Director of Children's Christian Education</span>
+                    <p>
+                        She leads children's education. Her focus is directing biblical education programs and values designed exclusively for children.
+                    </p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="card-content">
+                    <h4>Wiliam</h4>
+                    <span class="role">Director of Social Prevention & Family</span>
+                    <p>
+                        He manages preventive social impact. He executes strategies in schools and develops the School for Parents to strengthen the family core.
+                    </p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="card-content">
+                    <h4>Antony</h4>
+                    <span class="role">Director of Theology & Creative Media</span>
+                    <p>
+                        An integral role that cares for the spiritual health of the team and public image. Responsible for theological content and media management.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="volunteers-section mobile-centered">
+        <div class="volunteer-box">
+            <h3>Volunteer Corps</h3>
+            <p>
+                Mision 21 would not be possible without our volunteer corps. They are committed individuals who provide essential operational and logistical support in every activity we carry out on the ground.
+            </p>
+        </div>
+    </section>
+
+</Layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let slideIndex = 0;
+        const slides = document.querySelectorAll(".carousel-slide");
+        const intervalTime = 4000; 
+
+        function showSlides() {
+            if(slides.length === 0) return;
+            slides.forEach(slide => slide.classList.remove("active"));
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            slides[slideIndex - 1].classList.add("active");
+            setTimeout(showSlides, intervalTime); 
+        }
+
+        if (slides.length > 0) {
+            setTimeout(showSlides, intervalTime);
+        }
+    });
+</script>
+
+<style>
+    /* --- CAROUSEL --- */
+    .hero-carousel-container {
+        width: 100%;
+        position: relative;
+        height: 400px; 
+        overflow: hidden;
+        border-radius: 12px;
+        margin-bottom: 3rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .carousel-slide {
+        display: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0; left: 0;
+    }
+
+    .carousel-slide.active { display: block; }
+
+    .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+    .fade { animation: fade 1.5s; }
+    @keyframes fade { from {opacity: 0.4} to {opacity: 1} }
+
+    /* --- GENERAL TEXT STYLES --- */
+    p {
+        color: #ccc; 
+        line-height: 1.8;
+        margin-bottom: 1.5em;
+        font-size: 1.05rem;
+    }
+
+    h2, h3, h4, strong { color: #fff; }
+
+    h2 { font-size: 2.2rem; margin-bottom: 1.5rem; text-align: left; }
+
+    .lead-text {
+        font-size: 1.3em;
+        color: #fff;
+        margin-bottom: 1.5em;
+        font-weight: 300;
+    }
+
+    .divider {
+        border: 0;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1); 
+        margin: 4rem 0;
+    }
+
+    /* --- PILLARS --- */
+    .pillars-container {
+        display: flex;
+        justify-content: space-around;
+        margin: 3rem 0;
+        flex-wrap: wrap;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .pillar {
+        flex: 1;
+        min-width: 150px;
+        padding: 1rem;
+    }
+
+    .pillar i {
+        font-size: 3rem;
+        color: #F7931A; 
+        margin-bottom: 1rem;
+        transition: transform 0.3s;
+    }
+    
+    .pillar:hover i { transform: scale(1.1); }
+    .pillar h4 { font-weight: 700; margin-top: 0.5rem; }
+
+    /* --- TEAM --- */
+    .team-section { margin-top: 2rem; }
+    
+    .team-intro {
+        text-align: left; 
+        max-width: 700px;
+        margin-bottom: 3rem;
+        color: #aaa;
+        font-size: 1.1rem;
+    }
+
+    .team-category {
+        color: #F7931A;
+        border-bottom: 2px solid #F7931A;
+        display: inline-block;
+        margin-bottom: 2rem;
+        margin-top: 1rem;
+        padding-bottom: 0.5rem;
+        font-size: 1.5rem;
+        text-align: left;
+    }
+
+    /* Use flexbox for the team wrapper by default for PC too (grid behavior) */
+    .team-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+        width: 100%;
+    }
+
+    .team-card {
+        background: rgba(255, 255, 255, 0.03); 
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        padding: 2rem;
+        transition: transform 0.3s ease, border-color 0.3s ease;
+        /* Ensures box-sizing doesn't break widths */
+        box-sizing: border-box;
+    }
+
+    .team-card:hover {
+        transform: translateY(-5px);
+        border-color: #F7931A;
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .team-card h4 { margin: 0; font-size: 1.4rem; color: #fff; }
+
+    .team-card .role {
+        display: block;
+        font-size: 0.85rem;
+        color: #F7931A;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-top: 0.5rem;
+    }
+
+    .team-card p { font-size: 0.95rem; color: #ccc; margin: 0; }
+
+    /* --- VOLUNTEERS --- */
+    .volunteers-section {
+        padding: 3rem 2rem;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px dashed rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        margin-top: 2rem;
+        text-align: center;
+    }
+    .volunteers-section h3 { color: #F7931A; margin-bottom: 1rem; }
+    .volunteer-box p { margin: 0 auto; max-width: 800px; }
+
+    /* =================================================================
+       MOBILE AND TABLET SOLUTION (Max Width 900px)
+       ================================================================= */
+    @media (max-width: 900px) {
+        
+        /* 1. FORCED CENTERED TEXT */
+        .mobile-centered h2, 
+        .mobile-centered h3, 
+        .mobile-centered p, 
+        .mobile-centered .team-intro,
+        .mobile-centered .team-category {
+            text-align: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        /* 2. REPAIR TEAM WRAPPER */
+        .team-wrapper {
+            display: flex !important; /* Change Grid to Flex */
+            flex-direction: column;
+            align-items: center; /* THIS CENTERS THE CHILDREN (CARDS) */
+            width: 100%;
+            padding: 0; /* Remove strange padding */
+        }
+
+        /* 3. REPAIR CARD (The left-side problem) */
+        .team-card {
+            text-align: center;
+            width: 100%;
+            max-width: 340px; /* A controlled width to float in the center */
+            
+            /* THE KEY: Auto margins on the sides */
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-bottom: 2rem;
+        }
+
+        /* 4. PILLARS ADJUSTMENT */
+        .pillars-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 5. CAROUSEL ADJUSTMENT */
+        .hero-carousel-container {
+            height: 250px;
+        }
+    }
+</style>

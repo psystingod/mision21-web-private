@@ -1,0 +1,12 @@
+---
+// Importamos el componente QUE ACABAMOS DE CREAR, no el de la librería directa
+import { KeystaticAdmin } from '../../components/KeystaticAdmin';
+
+export function getStaticPaths() {
+  return [
+    { params: { params: undefined } }
+  ];
+}
+---
+
+<KeystaticAdmin client:only="react" />

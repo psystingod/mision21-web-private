@@ -1,0 +1,231 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+    <body>
+        <Header />
+        
+        <main class="home-main" style="width: 100% !important; max-width: 100% !important; padding: 0 !important; margin: 0 !important;">
+            
+            <header id="home" class="masthead">
+                <div class="custom-container">
+                    <div class="hero-content">
+                        <h1>Bringing Values and Bitcoin to Communities</h1>
+                        <hr class="divider" />
+                        <p class="subtitle">Building a freer and more decentralized future for El Salvador.</p>
+                        <a class="btn btn-primary" href="#news">Discover More</a>
+                    </div>
+                </div>
+                
+                <div class="scroll-down">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </header>
+
+            <section id="news" class="page-section bg-dark">
+                <div class="custom-container">
+                    <div class="grid-layout">
+                        <div class="img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1000&auto=format&fit=crop" alt="Bitcoin Education">
+                        </div>
+                        <div class="text-wrapper">
+                            <h2>See what we are doing in the communities</h2>
+                            <hr class="divider divider-left">
+                            <p class="description">
+                                Mision 21 brings Bitcoin to the most needy communities, not just as technology, but as a tool for freedom. 
+                                We focus on teaching ethical values and financial education to the entire community, with a special emphasis 
+                                on preparing children and youth for the future.
+                            </p>
+                            <a class="btn btn-outline" href="/blog">
+                                Go to News <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="about" class="page-section section-alt">
+                <div class="custom-container">
+                    <div class="hero-content">
+                        <h2>Learn more about us</h2>
+                        <hr class="divider" />
+                        <p class="description centered-text">
+                            Behind Mision 21 is a passionate team of professionals, educators, and visionaries committed to social change. 
+                            If you want to meet the people who make this work possible and our history...
+                        </p>
+                        <a class="btn btn-primary" href="/about">Meet the Team</a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        <Footer />
+    </body>
+</html>
+
+<style>
+    /* LOCAL STYLES FOR HOME */
+
+    .custom-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        position: relative;
+        z-index: 2;
+        width: 100%;
+    }
+
+    /* --- HERO --- */
+    .masthead {
+        position: relative;
+        background: linear-gradient(to bottom, rgba(10, 10, 10, 0.8) 0%, rgba(10, 10, 10, 0.95) 100%), 
+                    url('../assets/background2.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        
+        /* 1. Use 100dvh to cover the exact mobile screen */
+        min-height: 100dvh; 
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        
+        /* 2. ADJUSTED PADDING TO RAISE CONTENT */
+        /* 110px is enough to clear the menu, but raises the visual center */
+        padding-top: 110px; 
+        padding-bottom: 40px;
+    }
+
+    .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .masthead h1 {
+        font-size: clamp(2rem, 4vw, 3.5rem); 
+        color: #fff;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 1rem; /* Reduced a bit */
+        line-height: 1.2;
+    }
+
+    /* --- HERE IS THE TRICK TO RAISE THE BUTTON --- */
+    .subtitle {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.1rem;
+        
+        /* Drastically reduced this margin (was 3rem) */
+        margin-bottom: 1.5rem; 
+        
+        font-weight: 300;
+        line-height: 1.5;
+    }
+
+    /* --- SECTIONS --- */
+    .page-section {
+        padding: 6rem 0;
+        width: 100%;
+        min-height: 100dvh; /* Real full screen */
+        display: flex;
+        align-items: center;
+    }
+
+    .bg-dark { background-color: var(--bg-darkest); }
+    .section-alt { background-color: var(--bg-dark-alt); border-top: 1px solid rgba(196, 106, 106, 0.05); }
+
+    h2 {
+        color: #fff;
+        font-size: clamp(1.8rem, 3vw, 2.5rem);
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+    }
+
+    .description {
+        color: var(--text-light);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+    }
+
+    .centered-text {
+        text-align: center;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* --- GRID --- */
+    .grid-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+
+    .img-wrapper img {
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .text-wrapper { text-align: center; }
+
+    @media (min-width: 992px) {
+        .masthead h1 { font-size: 3.5rem; }
+        .grid-layout { grid-template-columns: 1fr 1fr; }
+        .text-wrapper { text-align: left; }
+    }
+
+    /* --- VISUAL COMPONENTS --- */
+    .divider {
+        width: 4rem;
+        height: 0.3rem;
+        border: none;
+        background-color: var(--primary-orange);
+        /* Reduced margin for divider too */
+        margin: 0 auto 1.5rem auto; 
+        border-radius: 5px;
+        box-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    .divider-left { margin: 0 auto 2rem auto; }
+
+    @media (min-width: 992px) {
+        .divider-left { margin: 0 0 2rem 0; }
+    }
+
+    .scroll-down {
+        position: absolute;
+        bottom: 20px; /* A bit lower */
+        left: 50%;
+        transform: translateX(-50%);
+        color: var(--primary-orange);
+        font-size: 2rem;
+        animation: bounce 2s infinite;
+        opacity: 0.8;
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+        40% {transform: translateY(-10px) translateX(-50%);}
+        60% {transform: translateY(-5px) translateX(-50%);}
+    }
+    
+    .btn i { margin-left: 8px; }
+</style>

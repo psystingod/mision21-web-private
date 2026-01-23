@@ -1,0 +1,183 @@
+/*
+  GLOBAL CSS: Misión 21 - Versión Final Ajustada
+*/
+
+/* 1. REGLA VITAL */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-orange: #F7931A;
+    --bg-darkest: #0a0a0a;
+    --bg-dark-alt: #121212;
+    --text-light: #e0e0e0;
+    --accent: #F7931A;
+    --nav-height: 80px;
+}
+
+/* Tipografía */
+@font-face {
+    font-family: "Atkinson";
+    src: url("/fonts/atkinson-regular.woff") format("woff");
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Atkinson";
+    src: url("/fonts/atkinson-bold.woff") format("woff");
+    font-weight: 700;
+    font-display: swap;
+}
+
+/* Estilos Base */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    font-family: "Atkinson", sans-serif;
+    background-color: var(--bg-dark-alt);
+    color: #e0e0e0;
+    line-height: 1.6;
+    font-size: 17px;
+}
+
+/* MAIN */
+main {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    /* Padding para páginas de texto (About/Blog) */
+    padding: 130px 1.5rem 4rem 1.5rem;
+}
+
+/* =========================================================
+   HERO / PORTADAS (Home y Donate)
+   ========================================================= */
+
+header.masthead,
+.donate-hero {
+    /* Mágica solución para móviles modernos: */
+    min-height: 100dvh; 
+    width: 100%;
+    
+    /* Visible para permitir scroll en pantallas muy pequeñas */
+    overflow: visible; 
+    
+    /* Centrado */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    /* PADDING EQUILIBRADO: */
+    padding-top: 120px !important; 
+    padding-bottom: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0;
+    
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* =========================================================
+   TIPOGRAFÍA REDUCIDA (MÁS PEQUEÑA)
+   ========================================================= */
+
+h1 { 
+    /* Reducido para que no sea gigante */
+    font-size: clamp(2rem, 4vw, 3.2rem); 
+    line-height: 1.1; 
+    margin-bottom: 1rem; 
+    color: #fff; 
+    font-weight: 800; 
+}
+
+h2 { 
+    /* Reducido */
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem); 
+    margin-bottom: 1rem; 
+    color: #fff; 
+    font-weight: 700; 
+}
+
+h3 { 
+    font-size: 1.3rem; 
+    color: #fff; 
+    margin-bottom: 0.8rem; 
+}
+
+p {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5rem;
+    color: #ccc;
+}
+
+a { color: var(--accent); text-decoration: none; transition: 0.2s; }
+a:hover { color: var(--accent-dark); }
+
+/* Botones */
+.btn {
+    display: inline-flex;
+    padding: 0.8rem 2rem;
+    background: var(--primary-orange);
+    color: #000 !important;
+    font-weight: 800;
+    border-radius: 50px;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 1.5rem;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 15px rgba(247, 147, 26, 0.3);
+    white-space: nowrap; 
+    font-size: 0.9rem;
+}
+.btn:hover { transform: translateY(-2px); background: #ffca28; }
+
+/* Utilidades */
+.text-gradient {
+    background: -webkit-linear-gradient(45deg, #F7931A, #ffbc42);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+img { max-width: 100%; height: auto; border-radius: 12px; }
+
+hr.divider {
+    max-width: 4rem;
+    height: 3px;
+    background: var(--primary-orange);
+    border: none;
+    margin: 2rem auto;
+    border-radius: 2px;
+}
+hr.divider-left { margin: 2rem 0; }
+
+.bg-dark { background-color: var(--bg-darkest); }
+.section-alt {
+    background-color: #161616;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Grid System */
+.grid-responsive {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    width: 100%;
+}
+@media (min-width: 900px) {
+    .grid-responsive { grid-template-columns: 1fr 1fr; align-items: center; }
+}
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; }
+pre, code { background: #222; border-radius: 4px; }
+pre { padding: 1.5em; overflow-x: auto; border: 1px solid #333; }

@@ -1,0 +1,349 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={`Donate to ${SITE_TITLE}`} description="Help us bring financial freedom and values to the communities of El Salvador." />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+    <body>
+        <Header />
+        
+        <main class="donate-main" style="width: 100% !important; max-width: 100% !important; padding: 0 !important; margin: 0 !important;">
+            
+            <header class="masthead donate-hero">
+                <div class="overlay"></div>
+                <div class="custom-container">
+                    <div class="hero-content">
+                        
+                        <span class="badge-orange">Your contribution transforms lives</span>
+                        
+                        <h1>From Darkness to <br><span class="text-gradient">Financial Freedom</span></h1>
+                        <p class="subtitle">
+                            Where gangs once reigned, today we sow knowledge, values, and Bitcoin. Help us rescue the future of Salvadoran youth.
+                        </p>
+                        <a class="btn btn-primary" href="#donar-ahora">
+                            <i class="fa-brands fa-bitcoin"></i> Make a Donation
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <section class="page-section bg-dark">
+                <div class="custom-container">
+                    <div class="grid-layout">
+                        <div class="text-wrapper">
+                            <h2>More than a currency, <br>we deliver a future</h2>
+                            <hr class="divider divider-left">
+                            <p class="description">
+                                For decades, our most vulnerable communities lived under the shadow of violence and gangs. Young people grew up without options, seeing their future limited by invisible borders.
+                            </p>
+                            <p class="description">
+                                <strong>Mision 21</strong> was born to break that cycle. We believe that true freedom is not just economic, but also spiritual and mental.
+                            </p>
+                            <p class="description highlight-text">
+                                With your donations, we don't just teach how to use a wallet; we carry a message of dignity. We deliver technological tools to children who had never touched a computer and teach them that their worth depends not on their environment, but on their character and effort.
+                            </p>
+                        </div>
+                        <div class="img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1000&auto=format&fit=crop" alt="Children learning">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="page-section section-alt">
+                <div class="custom-container centered-text">
+                    <h2>A Holistic Approach</h2>
+                    <hr class="divider">
+                    <p class="description">To rescue a generation, we need to feed the mind, body, and spirit.</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <h3>Financial Freedom</h3>
+                            <p>We teach Bitcoin, programming, and personal finance. We provide real tools to compete in the global economy.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="fa-solid fa-futbol"></i>
+                            </div>
+                            <h3>Sports and Recreation</h3>
+                            <p>Through tournaments and soccer schools, we keep young people away from harmful idleness, teaching discipline and teamwork.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <h3>Christian Values</h3>
+                            <p>The foundation of everything. We believe that faith and solid values are the bedrock for a prosperous and purposeful life.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="donar-ahora" class="page-section bg-bitcoin">
+                <div class="custom-container">
+                    <div class="donation-wrapper">
+                        <div class="donation-text">
+                            <h2>Join the Mision</h2>
+                            <p>
+                                Every satoshi counts. Your contribution buys soccer balls, educational materials, snacks for the children, and keeps our teaching centers alive.
+                            </p>
+                            <ul class="check-list">
+                                <li><i class="fa-solid fa-check"></i> 100% transparent.</li>
+                                <li><i class="fa-solid fa-check"></i> Direct impact on communities.</li>
+                                <li><i class="fa-solid fa-check"></i> Help build the first Bitcoin country.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="crypto-card">
+                            <div class="card-header">
+                                <span id="network-title"><i class="fa-brands fa-bitcoin"></i> Bitcoin Network</span>
+                                <button id="toggle-network-btn" class="badge toggle-btn">
+                                    Switch to LN
+                                </button>
+                            </div>
+                            
+                            <div class="qr-code">
+                                <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bc1qlecq7jmw8772rgmtc0j87m7zcn8evrpts85mlf" alt="QR Code">
+                            </div>
+                            
+                            <div class="wallet-address">
+                                <label id="address-label">BTC Address (SegWit)</label>
+                                <div class="address-box">
+                                    <code id="wallet-code">bc1qlecq7jmw8772rgmtc0j87m7zcn8evrpts85mlf</code>
+                                    <button class="copy-btn" id="copy-btn">
+                                        <i class="fa-regular fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="lightning-note" id="network-note">
+                                <i class="fa-solid fa-bolt"></i> We accept Lightning Network
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        <Footer />
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const toggleBtn = document.getElementById('toggle-network-btn');
+                const networkTitle = document.getElementById('network-title');
+                const qrImage = document.getElementById('qr-image');
+                const addressLabel = document.getElementById('address-label');
+                const walletCode = document.getElementById('wallet-code');
+                const networkNote = document.getElementById('network-note');
+                const copyBtn = document.getElementById('copy-btn');
+
+                const onChainAddress = "BC1QLECQ7JMW8772RGMTC0J87M7ZCN8EVRPTS85MLF".toLowerCase();
+                const lightningAddress = "mission21@strike.me";
+
+                let isLightning = false;
+
+                if (toggleBtn) {
+                    toggleBtn.addEventListener('click', () => {
+                        isLightning = !isLightning; 
+                        if (isLightning) {
+                            toggleBtn.innerText = "Switch to BTC";
+                            toggleBtn.classList.add('ln-active');
+                            networkTitle.innerHTML = '<i class="fa-solid fa-bolt"></i> Lightning Network';
+                            qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${lightningAddress}`;
+                            addressLabel.innerText = "Lightning Address / LNURL";
+                            walletCode.innerText = lightningAddress;
+                            networkNote.innerHTML = '<i class="fa-brands fa-bitcoin"></i> We accept Bitcoin Onchain';
+                        } else {
+                            toggleBtn.innerText = "Switch to LN";
+                            toggleBtn.classList.remove('ln-active');
+                            networkTitle.innerHTML = '<i class="fa-brands fa-bitcoin"></i> Bitcoin Network';
+                            qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${onChainAddress}`;
+                            addressLabel.innerText = "BTC Address (SegWit)";
+                            walletCode.innerText = onChainAddress;
+                            networkNote.innerHTML = '<i class="fa-solid fa-bolt"></i> We accept Lightning Network';
+                        }
+                    });
+                }
+
+                if (copyBtn) {
+                    copyBtn.addEventListener('click', () => {
+                        const textToCopy = walletCode.innerText;
+                        navigator.clipboard.writeText(textToCopy).then(() => {
+                            alert('Address copied to clipboard!');
+                        }).catch(err => {
+                            console.error('Error copying: ', err);
+                        });
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<style>
+    /* Estilos Locales */
+    .custom-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        position: relative;
+        z-index: 2;
+        width: 100%;
+    }
+
+    .donate-hero {
+        position: relative;
+        background: url('https://images.unsplash.com/photo-1596700816965-4b087796d11f?q=80&w=1600&auto=format&fit=crop'); 
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        
+        min-height: 100dvh; 
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        
+        padding-top: 150px; 
+        padding-bottom: 60px;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(to bottom, rgba(10, 10, 10, 0.7) 0%, rgba(10, 10, 10, 0.95) 100%);
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .donate-hero h1 {
+        font-size: clamp(2rem, 4vw, 3.2rem); 
+        color: #fff;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        line-height: 1.1;
+    }
+
+    .text-gradient {
+        background: -webkit-linear-gradient(45deg, #F7931A, #ffbc42);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* ESTILOS DEL BADGE (Ajustado) */
+    .badge-orange {
+        background-color: rgba(247, 147, 26, 0.2);
+        color: #F7931A;
+        border: 1px solid #F7931A;
+        padding: 0.4em 1em; /* Un poco más compacto */
+        border-radius: 50px;
+        font-size: 0.85rem; /* Fuente ligera */
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 1.2rem; /* Margen reducido para no empujar mucho el título */
+        letter-spacing: 1px;
+    }
+
+    .subtitle {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.1rem;
+        margin-bottom: 2.5rem;
+        font-weight: 300;
+        line-height: 1.6;
+    }
+
+    /* --- RESTO DE ESTILOS INTACTOS --- */
+    .page-section { 
+        padding: 6rem 0; width: 100%; 
+        min-height: 100vh; 
+        display: flex; align-items: center; 
+    } 
+    .bg-dark { background-color: #0F0F0F; } 
+    .section-alt { background-color: #141414; border-top: 1px solid #222; }
+
+    h2 {
+        color: #fff;
+        font-size: clamp(1.8rem, 3vw, 2.5rem);
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+
+    .divider { width: 4rem; height: 0.3rem; background-color: #F7931A; margin: 0 auto 2rem auto; border: none; border-radius: 5px; }
+    .divider-left { margin: 0 auto 2rem auto; }
+    .description { color: #ccc; font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; }
+    .highlight-text { border-left: 4px solid #F7931A; padding-left: 1.5rem; font-style: italic; color: #fff; }
+
+    .grid-layout { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
+    .img-wrapper img { width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+    .text-wrapper { text-align: center; }
+
+    @media (min-width: 992px) {
+        .grid-layout { grid-template-columns: 1fr 1fr; }
+        .text-wrapper { text-align: left; }
+        .divider-left { margin: 0 0 2rem 0; }
+    }
+
+    .features-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 3rem; }
+    .feature-card { background: rgba(255, 255, 255, 0.03); padding: 2.5rem; border-radius: 16px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.05); transition: transform 0.3s ease; }
+    .feature-card:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.06); border-color: #F7931A; }
+    .icon-box { font-size: 3rem; color: #F7931A; margin-bottom: 1.5rem; }
+    .feature-card h3 { font-size: 1.4rem; margin-bottom: 1rem; color: #fff; }
+    .feature-card p { color: #aaa; line-height: 1.6; }
+
+    @media (min-width: 768px) {
+        .features-grid { grid-template-columns: repeat(3, 1fr); }
+        .centered-text { text-align: center; }
+    }
+
+    .bg-bitcoin { background: radial-gradient(circle at center, #1a150e 0%, #000000 100%); border-top: 1px solid #332200; }
+    .donation-wrapper { display: flex; flex-direction: column; gap: 4rem; align-items: center; }
+    .donation-text { text-align: center; max-width: 600px; }
+    .check-list { list-style: none; padding: 0; margin-top: 2rem; text-align: left; display: inline-block; }
+    .check-list li { margin-bottom: 0.8rem; font-size: 1.1rem; color: #ddd; }
+    .check-list i { color: #F7931A; margin-right: 10px; }
+
+    .crypto-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 2rem; width: 100%; max-width: 400px; box-shadow: 0 0 30px rgba(247, 147, 26, 0.15); text-align: center; }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; color: #fff; font-weight: bold; }
+    .toggle-btn { background: #F7931A; color: #000; padding: 0.3rem 0.8rem; border-radius: 4px; font-size: 0.75rem; cursor: pointer; border: none; transition: all 0.3s ease; font-weight: bold; text-transform: uppercase; line-height: inherit; font-family: inherit; }
+    .toggle-btn:hover { background: #ffaa44; transform: scale(1.05); }
+    .toggle-btn.ln-active { background: #f7ce1a; box-shadow: 0 0 10px rgba(247, 206, 26, 0.4); }
+
+    .qr-code { width: 100%; display: flex; justify-content: center; margin-bottom: 1.5rem; }
+    .qr-code img { width: 200px; height: 200px; border-radius: 10px; border: 5px solid #fff; }
+
+    .wallet-address { text-align: left; margin-bottom: 1rem; }
+    .wallet-address label { display: block; color: #888; font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .address-box { display: flex; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; overflow: hidden; }
+    .address-box code { padding: 10px; font-family: monospace; color: #F7931A; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-grow: 1; }
+    .copy-btn { background: #333; border: none; color: #fff; padding: 0 15px; cursor: pointer; transition: background 0.3s; }
+    .copy-btn:hover { background: #555; }
+    .lightning-note { font-size: 0.9rem; color: #F7931A; margin-top: 1rem; }
+
+    @media (min-width: 992px) {
+        .donation-wrapper { flex-direction: row; justify-content: space-between; }
+        .donation-text { text-align: left; width: 50%; }
+    }
+</style>

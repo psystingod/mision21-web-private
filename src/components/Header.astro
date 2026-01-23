@@ -1,0 +1,212 @@
+---
+import { SITE_TITLE } from '../consts';
+import HeaderLink from './HeaderLink.astro';
+import logo from '../assets/logo.png';
+---
+
+<header id="mainNav">
+    <nav>
+        <a href="/" class="logo-container">
+            <img src={logo.src} alt={SITE_TITLE} class="site-logo" />
+        </a>
+
+        <button class="hamburger" aria-label="Abrir menú">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <div class="mobile-backdrop"></div>
+
+        <div class="nav-menu-wrapper">
+            
+            <div class="internal-links">
+                <HeaderLink href="/">Home</HeaderLink>
+                <HeaderLink href="/blog">News</HeaderLink>
+                <HeaderLink href="/writings">Writings</HeaderLink>
+                <HeaderLink href="/about">About</HeaderLink>
+                <a href="/donate" class="donate-btn">Donate</a>
+            </div>
+
+            <div class="social-links">
+                <a href="https://www.tiktok.com/@mision.21?_r=1&_t=ZM-93CstyVX24G" target="_blank">
+                    <span class="sr-only">TikTok</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V0h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V6.71a6.37 6.37 0 0 0-7.92 4.75 6.19 6.19 0 0 0 7.45 7.42 6.38 6.38 0 0 0 5.38-6.22V5.7a8.2 8.2 0 0 0 5.12 2.47v-3.7a4.91 4.91 0 0 1-.8-2.2z"/></svg>
+                </a>
+                <a href="https://x.com/Mission21fund" target="_blank">
+                    <span class="sr-only">X</span>
+                    <svg viewBox="0 0 16 16" aria-hidden="true" width="20" height="20" fill="currentColor"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z"></path></svg>
+                </a>
+                <a href="https://www.facebook.com/share/1Asqka61Mw/" target="_blank">
+                    <span class="sr-only">Facebook</span>
+                    <svg viewBox="0 0 16 16" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path></svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<style>
+    /* --- CONFIGURACIÓN HEADER --- */
+    header {
+        margin: 0; padding: 0.25rem 0; 
+        position: fixed; top: 0; left: 0; width: 100%; 
+        z-index: 1000; background: transparent;
+        transition: all 0.4s ease-in-out;
+        box-sizing: border-box; /* Seguridad extra */
+    }
+
+    header:global(.navbar-scrolled) {
+        background: rgba(10, 10, 10, 0.95);
+        padding: 0.2rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+    }
+
+    nav {
+        /* Position relative es CLAVE para que el botón absoluto funcione */
+        position: relative; 
+        display: flex; align-items: center; justify-content: space-between;
+        width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5em;
+        box-sizing: border-box;
+    }
+
+    /* LOGO */
+    .logo-container { display: flex; align-items: center; z-index: 1001; }
+    .site-logo { height: 140px; width: auto; transition: height 0.4s ease-in-out; }
+    header:global(.navbar-scrolled) .site-logo { height: 110px; }
+
+    /* LINKS GENERALES */
+    nav a {
+        padding: 0.25em 0.5em; color: rgba(255, 255, 255, 0.7);
+        border-bottom: 4px solid transparent; text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    nav a:hover, nav a.active { color: var(--accent); }
+    nav a.active { border-bottom-color: var(--accent); }
+
+    /* BOTÓN DONAR */
+    nav a.donate-btn {
+        background-color: #F7931A; color: #ffffff !important;
+        border-radius: 9999px; padding: 0.5em 1.5em;
+        font-weight: bold; text-transform: uppercase; font-size: 0.9em;
+        border: none; margin-left: 15px; transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(247, 147, 26, 0.3);
+    }
+    nav a.donate-btn:hover {
+        background-color: #e6830d; transform: scale(1.05); color: #ffffff;
+        box-shadow: 0 0 20px rgba(247, 147, 26, 0.6);
+    }
+
+    .social-links { display: flex; color: inherit; gap: 10px; }
+    .social-links a:hover { color: var(--accent); }
+
+    /* ESTILOS HAMBURGUESA BASE */
+    .hamburger { display: none; } /* Oculto en PC por defecto */
+    .mobile-backdrop { display: none; }
+
+    /* =========================================
+       ESCRITORIO (PC - min-width 993px)
+       ========================================= */
+    @media (min-width: 993px) {
+        .nav-menu-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-grow: 1; 
+            margin-left: 2rem;
+        }
+        .internal-links { display: flex; align-items: center; margin: 0 auto; }
+    }
+
+    /* =========================================
+       MÓVIL Y TABLET (max-width 992px)
+       ========================================= */
+    @media (max-width: 992px) {
+        
+        .site-logo { height: 60px; }
+        header:global(.navbar-scrolled) .site-logo { height: 50px; }
+
+        /* AQUÍ ESTÁ LA SOLUCIÓN:
+           Posición Absoluta para que nunca se esconda ni dependa del flexbox
+        */
+        .hamburger {
+            display: block;
+            position: absolute;
+            right: 1.5em; /* Misma distancia que el padding del nav */
+            top: 50%;
+            transform: translateY(-50%); /* Centrado vertical perfecto */
+            
+            background: none; border: none; cursor: pointer;
+            padding: 10px;
+            z-index: 2001; 
+        }
+        
+        .hamburger .bar {
+            display: block; width: 25px; height: 3px; margin: 5px auto;
+            background-color: #fff; transition: 0.3s; border-radius: 2px;
+        }
+        
+        /* Animación */
+        .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger.active .bar:nth-child(2) { opacity: 0; }
+        .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        /* MENÚ LATERAL */
+        .nav-menu-wrapper {
+            position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+            background-color: #0a0a0a; /* Fondo sólido */
+            display: flex; flex-direction: column;
+            padding: 90px 2rem 2rem 2rem; 
+            transition: 0.3s ease-in-out;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.8);
+            border-left: 1px solid #333; z-index: 2000;
+        }
+        .nav-menu-wrapper.active { right: 0; }
+
+        .internal-links { display: flex; flex-direction: column; width: 100%; align-items: flex-start; }
+        nav a { display: block; width: 100%; padding: 1rem 0; font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        nav a.donate-btn { margin: 1.5rem 0; width: auto; text-align: center; display: inline-block; margin-left: 0; }
+        .social-links { margin-top: auto; padding-bottom: 2rem; width: 100%; justify-content: center; gap: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; }
+
+        .mobile-backdrop {
+            display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); z-index: 1999; opacity: 0; pointer-events: none; transition: 0.3s;
+        }
+        .mobile-backdrop.active { opacity: 1; pointer-events: all; }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Scroll Logic
+        const navbar = document.getElementById('mainNav');
+        const navbarShrink = () => {
+            if (!navbar) return;
+            if (window.scrollY > 50) navbar.classList.add('navbar-scrolled');
+            else navbar.classList.remove('navbar-scrolled');
+        };
+        navbarShrink();
+        window.addEventListener('scroll', navbarShrink);
+
+        // Hamburguesa Logic
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu-wrapper');
+        const backdrop = document.querySelector('.mobile-backdrop');
+        const links = document.querySelectorAll('.nav-menu-wrapper a');
+
+        function toggleMenu() {
+            if (hamburger && navMenu && backdrop) {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                backdrop.classList.toggle('active');
+            }
+        }
+
+        if(hamburger) {
+            hamburger.addEventListener('click', toggleMenu);
+            if(backdrop) backdrop.addEventListener('click', toggleMenu);
+            links.forEach(link => link.addEventListener('click', toggleMenu));
+        }
+    });
+</script>
