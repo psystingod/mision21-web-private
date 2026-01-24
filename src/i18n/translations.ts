@@ -162,10 +162,10 @@ export const translations = {
     
     // ROLES AND MEMBERS
     'team.satoshi': 'Luis Satoshi',
-    'team.irvin': 'Irvin',
+    'team.irvin': 'Irving',
     'team.diego': 'Diego',
     'team.maricela': 'Maricela',
-    'team.wiliams': 'Wiliams',
+    'team.wiliams': 'Wiliam',
     'team.antony': 'Antony',
     
     'role.cvo': 'Founder & Chief Visionary Officer (CVO)',
