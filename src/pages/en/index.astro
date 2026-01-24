@@ -1,17 +1,17 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { useTranslations } from '../i18n/utils';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { useTranslations } from '../../i18n/utils';
 
 // Configurar idioma
-const lang = 'es';
+const lang = 'en';
 const t = useTranslations(lang);
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="en">
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -40,16 +40,18 @@ const t = useTranslations(lang);
                 <div class="custom-container">
                     <div class="grid-layout">
                         <div class="img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1000&auto=format&fit=crop" alt="Educación Bitcoin">
+                            <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1000&auto=format&fit=crop" alt="Bitcoin Education">
                         </div>
                         <div class="text-wrapper">
-                            <h2>{t('home.news.title')}</h2>
+                            <h2>See what we are doing in the communities</h2>
                             <hr class="divider divider-left">
                             <p class="description">
-                                {t('home.news.description')}
+                                Mision 21 brings Bitcoin to the most needy communities, not just as technology, but as a tool for freedom. 
+                                We focus on teaching ethical values and financial education to the entire community, with a special emphasis 
+                                on preparing children and youth for the future.
                             </p>
-                            <a class="btn btn-outline" href="/blog">
-                                {t('home.news.cta')} <i class="fas fa-arrow-right"></i>
+                            <a class="btn btn-outline" href="/en/blog">
+                                Go to {t('nav.news')} <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -59,12 +61,13 @@ const t = useTranslations(lang);
             <section id="about" class="page-section section-alt">
                 <div class="custom-container">
                     <div class="hero-content">
-                        <h2>{t('home.about.title')}</h2>
+                        <h2>Learn more about us</h2>
                         <hr class="divider" />
                         <p class="description centered-text">
-                            {t('home.about.description')}
+                            Behind Mision 21 is a passionate team of professionals, educators, and visionaries committed to social change. 
+                            If you want to meet the people who make this work possible and our history...
                         </p>
-                        <a class="btn btn-primary" href="/about">{t('home.about.cta')}</a>
+                        <a class="btn btn-primary" href="/en/about">Meet the Team</a>
                     </div>
                 </div>
             </section>
@@ -90,7 +93,7 @@ const t = useTranslations(lang);
     .masthead {
         position: relative;
         background: linear-gradient(to bottom, rgba(10, 10, 10, 0.8) 0%, rgba(10, 10, 10, 0.95) 100%), 
-                    url('../assets/background2.png');
+                    url('../../assets/background2.png');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;

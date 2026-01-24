@@ -2,15 +2,55 @@
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
 import logo from '../assets/logo.png';
+
+// IMPORTAR UTILIDADES I18N
+const currentPath = Astro.url.pathname;
+const isEnglish = currentPath.startsWith('/en');
+const lang = isEnglish ? 'en' : 'es';
+
+// Función simple de traducción
+const t = (key: string) => {
+    const translations: Record<string, Record<string, string>> = {
+        es: {
+            home: 'Home',
+            news: 'News',
+            writings: 'Luis Satoshi\'s Writings',
+            about: 'About',
+            donate: 'Donate',
+            menu: 'Abrir menú'
+        },
+        en: {
+            home: 'Home',
+            news: 'News',
+            writings: 'Luis Satoshi\'s Writings',
+            about: 'About',
+            donate: 'Donate',
+            menu: 'Open menu'
+        }
+    };
+    return translations[lang][key] || key;
+};
+
+// Construir URLs bilingües
+const homeUrl = isEnglish ? '/en' : '/';
+const blogUrl = isEnglish ? '/en/blog' : '/blog';
+const writingsUrl = isEnglish ? '/en/writings' : '/writings';
+const aboutUrl = isEnglish ? '/en/about' : '/about';
+const donateUrl = isEnglish ? '/en/donate' : '/donate';
+
+// URLs para el selector de idioma
+const pathWithoutLang = currentPath.replace(/^\/en/, '') || '/';
+const esUrl = pathWithoutLang === '/' ? '/' : pathWithoutLang;
+const enUrl = `/en${pathWithoutLang}`;
 ---
 
 <header id="mainNav">
     <nav>
-        <a href="/" class="logo-container">
+        <a href={homeUrl} class="logo-container">
             <img src={logo.src} alt={SITE_TITLE} class="site-logo" />
         </a>
 
-        <button class="hamburger" aria-label="Abrir menú">
+        <button class="hamburger" aria-label={t('menu')}>
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
@@ -21,11 +61,32 @@ import logo from '../assets/logo.png';
         <div class="nav-menu-wrapper">
             
             <div class="internal-links">
-                <HeaderLink href="/">Home</HeaderLink>
-                <HeaderLink href="/blog">News</HeaderLink>
-                <HeaderLink href="/writings">Luis Satoshi's Writings</HeaderLink>
-                <HeaderLink href="/about">About</HeaderLink>
-                <a href="/donate" class="donate-btn">Donate</a>
+                <HeaderLink href={homeUrl}>{t('home')}</HeaderLink>
+                <HeaderLink href={blogUrl}>{t('news')}</HeaderLink>
+                <HeaderLink href={writingsUrl}>{t('writings')}</HeaderLink>
+                <HeaderLink href={aboutUrl}>{t('about')}</HeaderLink>
+                <a href={donateUrl} class="donate-btn">{t('donate')}</a>
+            </div>
+
+            <!-- SELECTOR DE IDIOMA -->
+            <div class="language-selector">
+                <button 
+                    class:list={['lang-btn', { active: lang === 'es' }]}
+                    data-lang="es"
+                    data-url={esUrl}
+                    aria-label="Español"
+                >
+                    🇪🇸 ES
+                </button>
+                <span class="separator">|</span>
+                <button 
+                    class:list={['lang-btn', { active: lang === 'en' }]}
+                    data-lang="en"
+                    data-url={enUrl}
+                    aria-label="English"
+                >
+                    🇺🇸 EN
+                </button>
             </div>
 
             <div class="social-links">
@@ -53,7 +114,7 @@ import logo from '../assets/logo.png';
         position: fixed; top: 0; left: 0; width: 100%; 
         z-index: 1000; background: transparent;
         transition: all 0.4s ease-in-out;
-        box-sizing: border-box; /* Seguridad extra */
+        box-sizing: border-box;
     }
 
     header:global(.navbar-scrolled) {
@@ -64,7 +125,6 @@ import logo from '../assets/logo.png';
     }
 
     nav {
-        /* Position relative es CLAVE para que el botón absoluto funcione */
         position: relative; 
         display: flex; align-items: center; justify-content: space-between;
         width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5em;
@@ -98,11 +158,48 @@ import logo from '../assets/logo.png';
         box-shadow: 0 0 20px rgba(247, 147, 26, 0.6);
     }
 
+    /* SELECTOR DE IDIOMA */
+    .language-selector {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-left: 1.5rem;
+    }
+
+    .lang-btn {
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 600;
+        font-size: 0.85rem;
+        cursor: pointer;
+        padding: 0.4rem 0.6rem;
+        border-radius: 4px;
+        transition: all 0.2s;
+        font-family: inherit;
+    }
+
+    .lang-btn:hover {
+        color: var(--accent);
+        background: rgba(247, 147, 26, 0.1);
+    }
+
+    .lang-btn.active {
+        color: var(--accent);
+        background: rgba(247, 147, 26, 0.15);
+        border-bottom: 2px solid var(--accent);
+    }
+
+    .separator {
+        color: #666;
+        user-select: none;
+    }
+
     .social-links { display: flex; color: inherit; gap: 10px; }
     .social-links a:hover { color: var(--accent); }
 
     /* ESTILOS HAMBURGUESA BASE */
-    .hamburger { display: none; } /* Oculto en PC por defecto */
+    .hamburger { display: none; }
     .mobile-backdrop { display: none; }
 
     /* =========================================
@@ -127,15 +224,12 @@ import logo from '../assets/logo.png';
         .site-logo { height: 60px; }
         header:global(.navbar-scrolled) .site-logo { height: 50px; }
 
-        /* AQUÍ ESTÁ LA SOLUCIÓN:
-           Posición Absoluta para que nunca se esconda ni dependa del flexbox
-        */
         .hamburger {
             display: block;
             position: absolute;
-            right: 1.5em; /* Misma distancia que el padding del nav */
+            right: 1.5em;
             top: 50%;
-            transform: translateY(-50%); /* Centrado vertical perfecto */
+            transform: translateY(-50%);
             
             background: none; border: none; cursor: pointer;
             padding: 10px;
@@ -147,7 +241,6 @@ import logo from '../assets/logo.png';
             background-color: #fff; transition: 0.3s; border-radius: 2px;
         }
         
-        /* Animación */
         .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
         .hamburger.active .bar:nth-child(2) { opacity: 0; }
         .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
@@ -155,7 +248,7 @@ import logo from '../assets/logo.png';
         /* MENÚ LATERAL */
         .nav-menu-wrapper {
             position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
-            background-color: #0a0a0a; /* Fondo sólido */
+            background-color: #0a0a0a;
             display: flex; flex-direction: column;
             padding: 90px 2rem 2rem 2rem; 
             transition: 0.3s ease-in-out;
@@ -167,6 +260,21 @@ import logo from '../assets/logo.png';
         .internal-links { display: flex; flex-direction: column; width: 100%; align-items: flex-start; }
         nav a { display: block; width: 100%; padding: 1rem 0; font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
         nav a.donate-btn { margin: 1.5rem 0; width: auto; text-align: center; display: inline-block; margin-left: 0; }
+
+        /* SELECTOR DE IDIOMA EN MÓVIL */
+        .language-selector {
+            margin: 1.5rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            justify-content: center;
+        }
+
+        .lang-btn {
+            font-size: 1rem;
+            padding: 0.6rem 1rem;
+        }
+
         .social-links { margin-top: auto; padding-bottom: 2rem; width: 100%; justify-content: center; gap: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; }
 
         .mobile-backdrop {
@@ -208,5 +316,21 @@ import logo from '../assets/logo.png';
             if(backdrop) backdrop.addEventListener('click', toggleMenu);
             links.forEach(link => link.addEventListener('click', toggleMenu));
         }
+
+        // SELECTOR DE IDIOMA - Guardar preferencia y redirigir
+        const langButtons = document.querySelectorAll('.lang-btn');
+        
+        langButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const target = e.currentTarget as HTMLButtonElement;
+                const lang = target.dataset.lang;
+                const url = target.dataset.url;
+                
+                if (lang && url) {
+                    localStorage.setItem('preferred-language', lang);
+                    window.location.href = url;
+                }
+            });
+        });
     });
 </script>

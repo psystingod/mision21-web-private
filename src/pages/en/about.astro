@@ -1,13 +1,13 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
-import { useTranslations } from '../i18n/utils';
+import Layout from '../../layouts/BlogPost.astro';
+import { useTranslations } from '../../i18n/utils';
 
-// Importar imágenes
-import AboutHeroImage1 from '../assets/members1.jpeg';
-import AboutHeroImage2 from '../assets/members2.jpeg';
+// Import images
+import AboutHeroImage1 from '../../assets/members1.jpeg';
+import AboutHeroImage2 from '../../assets/members2.jpeg';
 
 // Configurar idioma
-const lang = 'es';
+const lang = 'en';
 const t = useTranslations(lang);
 ---
 
@@ -19,11 +19,11 @@ const t = useTranslations(lang);
 
     <div class="hero-carousel-container">
         <div class="carousel-slide active fade">
-            <img src={AboutHeroImage1.src} alt="Misión 21 Equipo" />
+            <img src={AboutHeroImage1.src} alt="Mission 21 Team" />
         </div>
 
         <div class="carousel-slide fade">
-            <img src={AboutHeroImage2.src} alt="Comunidad Misión 21" />
+            <img src={AboutHeroImage2.src} alt="Mission 21 Community" />
         </div>
     </div>
 
@@ -32,7 +32,7 @@ const t = useTranslations(lang);
             <h2>{t('about.history')}</h2>
             <div class="text-content">
                 <p class="lead-text">
-                    <strong>Misión 21</strong> {t('about.lead')}
+                    <strong>Mision 21</strong> {t('about.lead')}
                 </p>
                 <p>
                     {t('about.founder.text')}
@@ -171,7 +171,7 @@ const t = useTranslations(lang);
 </script>
 
 <style>
-    /* --- CARRUSEL --- */
+    /* --- CAROUSEL --- */
     .hero-carousel-container {
         width: 100%;
         position: relative;
@@ -202,7 +202,7 @@ const t = useTranslations(lang);
     .fade { animation: fade 1.5s; }
     @keyframes fade { from {opacity: 0.4} to {opacity: 1} }
 
-    /* --- ESTILOS TEXTO GENERAL --- */
+    /* --- GENERAL TEXT STYLES --- */
     p {
         color: #ccc; 
         line-height: 1.8;
@@ -228,7 +228,7 @@ const t = useTranslations(lang);
         margin: 4rem 0;
     }
 
-    /* --- PILARES --- */
+    /* --- PILLARS --- */
     .pillars-container {
         display: flex;
         justify-content: space-around;
@@ -254,7 +254,7 @@ const t = useTranslations(lang);
     .pillar:hover i { transform: scale(1.1); }
     .pillar h4 { font-weight: 700; margin-top: 0.5rem; }
 
-    /* --- EQUIPO --- */
+    /* --- TEAM --- */
     .team-section { margin-top: 2rem; }
     
     .team-intro {
@@ -314,7 +314,7 @@ const t = useTranslations(lang);
 
     .team-card p { font-size: 0.95rem; color: #ccc; margin: 0; }
 
-    /* --- VOLUNTARIOS --- */
+    /* --- VOLUNTEERS --- */
     .volunteers-section {
         padding: 3rem 2rem;
         background: rgba(255, 255, 255, 0.02);

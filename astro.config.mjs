@@ -21,4 +21,13 @@ export default defineConfig({
   output: 'server',
 
   adapter: vercel(),
+
+  // 4. CONFIGURACIÓN DE INTERNACIONALIZACIÓN
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: false, // español sin prefijo (/about), inglés con prefijo (/en/about)
+    }
+  }
 });

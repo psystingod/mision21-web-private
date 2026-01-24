@@ -1,17 +1,17 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_TITLE } from '../consts';
-import { useTranslations } from '../i18n/utils';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
+import { useTranslations } from '../../i18n/utils';
 
 // Configurar idioma
-const lang = 'es';
+const lang = 'en';
 const t = useTranslations(lang);
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="en">
     <head>
         <BaseHead title={`Donate to ${SITE_TITLE}`} description={t('donate.description')} />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -49,14 +49,14 @@ const t = useTranslations(lang);
                                 {t('donate.section1.p1')}
                             </p>
                             <p class="description">
-                                <strong>Misión 21</strong> {t('donate.section1.p2')}
+                                <strong>Mision 21</strong> {t('donate.section1.p2')}
                             </p>
                             <p class="description highlight-text">
                                 {t('donate.section1.p3')}
                             </p>
                         </div>
                         <div class="img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1000&auto=format&fit=crop" alt="Niños aprendiendo">
+                            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1000&auto=format&fit=crop" alt="Children learning">
                         </div>
                     </div>
                 </div>
@@ -169,7 +169,7 @@ const t = useTranslations(lang);
                             qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${lightningAddress}`;
                             addressLabel.innerText = "Lightning Address / LNURL";
                             walletCode.innerText = lightningAddress;
-                            networkNote.innerHTML = '<i class="fa-brands fa-bitcoin"></i> Aceptamos Bitcoin Onchain';
+                            networkNote.innerHTML = '<i class="fa-brands fa-bitcoin"></i> We accept Bitcoin Onchain';
                         } else {
                             toggleBtn.innerText = "Switch to LN";
                             toggleBtn.classList.remove('ln-active');
@@ -177,7 +177,7 @@ const t = useTranslations(lang);
                             qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${onChainAddress}`;
                             addressLabel.innerText = "BTC Address (SegWit)";
                             walletCode.innerText = onChainAddress;
-                            networkNote.innerHTML = '<i class="fa-solid fa-bolt"></i> Aceptamos Lightning Network';
+                            networkNote.innerHTML = '<i class="fa-solid fa-bolt"></i> We accept Lightning Network';
                         }
                     });
                 }
@@ -186,7 +186,7 @@ const t = useTranslations(lang);
                     copyBtn.addEventListener('click', () => {
                         const textToCopy = walletCode.innerText;
                         navigator.clipboard.writeText(textToCopy).then(() => {
-                            alert('¡Dirección copiada al portapapeles!');
+                            alert('Address copied to clipboard!');
                         }).catch(err => {
                             console.error('Error copying: ', err);
                         });

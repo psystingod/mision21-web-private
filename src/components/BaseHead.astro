@@ -15,6 +15,16 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = FallbackImage } = Astro.props;
+
+// Detectar idioma actual
+const currentPath = Astro.url.pathname;
+const isEnglish = currentPath.startsWith('/en');
+const currentLang = isEnglish ? 'en' : 'es';
+
+// URLs alternativas para hreflang
+const pathWithoutLang = currentPath.replace(/^\/en/, '') || '/';
+const esUrl = new URL(pathWithoutLang === '/' ? '/' : pathWithoutLang, Astro.site);
+const enUrl = new URL(`/en${pathWithoutLang}`, Astro.site);
 ---
 
 <!-- Global Metadata -->
@@ -37,6 +47,14 @@ const { title, description, image = FallbackImage } = Astro.props;
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
+<!-- Hreflang para SEO multiidioma -->
+<link rel="alternate" hreflang="es" href={esUrl} />
+<link rel="alternate" hreflang="en" href={enUrl} />
+<link rel="alternate" hreflang="x-default" href={esUrl} />
+
+<!-- Language meta tag -->
+<html lang={currentLang} />
+
 <!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
@@ -48,6 +66,7 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image.src, Astro.url)} />
+<meta property="og:locale" content={currentLang === 'es' ? 'es_ES' : 'en_US'} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -55,10 +74,47 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- SCRIPT DE DETECCIÓN AUTOMÁTICA DE IDIOMA -->
+<script is:inline>
+(function() {
+  // Solo ejecutar en la página raíz
+  const currentPath = window.location.pathname;
+  if (currentPath !== '/' && currentPath !== '') {
+    return;
+  }
+  
+  // Verificar si ya hay una preferencia guardada
+  const savedLang = localStorage.getItem('preferred-language');
+  
+  if (savedLang) {
+    // Si hay idioma guardado, redirigir si es necesario
+    if (savedLang === 'en' && !currentPath.startsWith('/en')) {
+      window.location.href = '/en';
+    } else if (savedLang === 'es' && currentPath.startsWith('/en')) {
+      window.location.href = '/';
+    }
+    return;
+  }
+  
+  // Detectar idioma del navegador
+  const browserLang = navigator.language || navigator.userLanguage;
+  const langCode = browserLang.split('-')[0]; // 'es-MX' -> 'es', 'en-US' -> 'en'
+  
+  // Redirigir según el idioma detectado
+  if (langCode === 'en') {
+    localStorage.setItem('preferred-language', 'en');
+    window.location.href = '/en';
+  } else {
+    // Por defecto español (o cualquier otro idioma que no sea inglés)
+    localStorage.setItem('preferred-language', 'es');
+    // Ya estamos en español (raíz), no hace falta redirigir
+  }
+})();
+</script>
