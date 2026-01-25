@@ -43,13 +43,26 @@ html, body {
     font-size: 17px;
 }
 
-/* MAIN */
+/* MAIN - Ajustado para header grande */
 main {
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
-    /* Padding para páginas de texto (About/Blog) */
-    padding: 130px 1.5rem 4rem 1.5rem;
+    /* Aumentado padding-top para el header grande */
+    padding: 180px 1.5rem 4rem 1.5rem;
+}
+
+/* Responsive para main */
+@media (max-width: 900px) {
+    main {
+        padding: 140px 1.5rem 3rem 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 120px 1rem 2rem 1rem;
+    }
 }
 
 /* =========================================================

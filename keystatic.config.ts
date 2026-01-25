@@ -5,7 +5,7 @@ export default config({
     ? {
         // CONFIGURACIÓN PARA PRODUCCIÓN (CON SEGURIDAD)
         kind: 'github',
-        repo: 'psystingod/mision21-web', // EJEMPLO: 'mision21/web-oficial'
+        repo: 'psystingod/mision21-web-private', // EJEMPLO: 'mision21/web-oficial'
       }
       
     : {
@@ -13,6 +13,7 @@ export default config({
         kind: 'local',
       },
   collections: {
+    // === BLOG / NEWS ===
     posts: collection({
       label: 'News About M21',
       slugField: 'title',
@@ -22,6 +23,16 @@ export default config({
         title: fields.slug({ name: { label: 'Título' } }),
         description: fields.text({ label: 'Descripción Corta', multiline: true }),
         pubDate: fields.date({ label: 'Fecha de Publicación' }),
+        
+        // CAMPO DE IDIOMA - IMPORTANTE PARA FILTRAR
+        language: fields.select({
+          label: 'Idioma',
+          options: [
+            { label: 'Español', value: 'es' },
+            { label: 'English', value: 'en' },
+          ],
+          defaultValue: 'es',
+        }),
         
         // Configuración para la imagen destacada
         heroImage: fields.image({
@@ -42,7 +53,8 @@ export default config({
         }),
       },
     }),
-    // --- NUEVA COLECCIÓN WRITINGS ---
+    
+    // === WRITINGS ===
     writings: collection({
       label: 'Luis Satoshi Writings', // Nombre que verás en el panel
       slugField: 'title',
@@ -52,6 +64,22 @@ export default config({
         title: fields.slug({ name: { label: 'Título' } }),
         description: fields.text({ label: 'Descripción Corta', multiline: true }),
         pubDate: fields.date({ label: 'Fecha de Publicación' }),
+        
+        // NUEVO CAMPO: AUTOR
+        author: fields.text({
+          label: 'Autor',
+          defaultValue: 'Luis Satoshi',
+        }),
+        
+        // CAMPO DE IDIOMA - IMPORTANTE PARA FILTRAR
+        language: fields.select({
+          label: 'Idioma',
+          options: [
+            { label: 'Español', value: 'es' },
+            { label: 'English', value: 'en' },
+          ],
+          defaultValue: 'es',
+        }),
         
         // Imágenes guardadas en su propia carpeta pública
         heroImage: fields.image({
@@ -71,6 +99,6 @@ export default config({
           },
         }),
       },
-    }), // HASTA ACÁ WRITINGS
+    }),
   },
 });

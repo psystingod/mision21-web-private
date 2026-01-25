@@ -1,17 +1,54 @@
 ---
+import { getLangFromUrl } from '../i18n/utils';
+
 interface Props {
-	date: Date;
+	date: Date | string | undefined;
 }
 
 const { date } = Astro.props;
+
+// Detectar idioma de la página actual
+const lang = getLangFromUrl(Astro.url);
+
+// Convertir a Date si es necesario
+let dateObj: Date | null = null;
+
+if (date instanceof Date) {
+	dateObj = date;
+} else if (typeof date === 'string') {
+	dateObj = new Date(date);
+} else if (date) {
+	dateObj = new Date(date);
+}
+
+// Si no hay fecha válida, mostrar placeholder
+if (!dateObj || isNaN(dateObj.getTime())) {
+	dateObj = new Date();
+}
+
+// Usar UTC para evitar problemas de zona horaria
+const year = dateObj.getUTCFullYear();
+const month = dateObj.getUTCMonth();
+const day = dateObj.getUTCDate();
+
+// Crear una fecha en UTC para el formateo
+const utcDate = new Date(Date.UTC(year, month, day));
+
+// Determinar locale según el idioma
+const locale = lang === 'en' ? 'en-US' : 'es-ES';
+
+// Formatear la fecha según el idioma
+const formattedDate = utcDate.toLocaleDateString(locale, {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+	timeZone: 'UTC'
+});
+
+// Para el atributo datetime ISO
+const isoDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 ---
 
-<time datetime={date.toISOString()}>
-	{
-		date.toLocaleDateString('en-us', {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-		})
-	}
+<time datetime={isoDate}>
+	{formattedDate}
 </time>

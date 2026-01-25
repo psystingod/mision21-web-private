@@ -1,19 +1,32 @@
 ---
-import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import BlogPost from '../../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
-    // CAMBIO 1: Buscar en 'writings'
-	const posts = await getCollection('writings');
+	const allWritings = await getCollection('writings');
+	const posts = allWritings.filter((post) => post.data.language === 'en');
+	
 	return posts.map((post) => ({
 		params: { slug: post.slug },
-		props: post,
 	}));
 }
 
-const post = Astro.props;
+const { slug } = Astro.params;
+
+if (!slug) {
+	throw new Error('No slug provided');
+}
+
+const post = await getEntry('writings', slug);
+
+if (!post) {
+	throw new Error(`No writing found for slug: ${slug}`);
+}
+
 const { Content } = await post.render();
 ---
+
 <BlogPost {...post.data}>
 	<Content />
 </BlogPost>

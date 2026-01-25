@@ -41,10 +41,10 @@ export const translations = {
     
     // ROLES Y MIEMBROS
     'team.satoshi': 'Luis Satoshi',
-    'team.irvin': 'Irvin',
+    'team.irvin': 'Irving',
     'team.diego': 'Diego',
     'team.maricela': 'Maricela',
-    'team.wiliams': 'Wiliams',
+    'team.wiliams': 'Wiliam',
     'team.antony': 'Antony',
     
     'role.cvo': 'Founder & Chief Visionary Officer (CVO)',
@@ -68,12 +68,15 @@ export const translations = {
     'blog.readmore': 'Leer más',
     'blog.published': 'Publicado el',
     'blog.updated': 'Actualizado el',
+    'blog.noPosts': 'No hay publicaciones disponibles en este momento.',
     
     // WRITINGS
     'writings.title': 'Luis Satoshi\'s Writings',
     'writings.description': 'Reflexiones y escritos de nuestro fundador',
     'writings.back': 'Volver a Writings',
     'writings.readmore': 'Leer más',
+    'writings.author': 'Autor',
+    'writings.noWritings': 'No hay escritos disponibles en este momento.',
     
     // DONATE
     'donate.title': 'Apoya Nuestra Misión',
@@ -162,10 +165,10 @@ export const translations = {
     
     // ROLES AND MEMBERS
     'team.satoshi': 'Luis Satoshi',
-    'team.irvin': 'Irvin',
+    'team.irvin': 'Irving',
     'team.diego': 'Diego',
     'team.maricela': 'Maricela',
-    'team.wiliams': 'Wiliams',
+    'team.wiliams': 'Wiliam',
     'team.antony': 'Antony',
     
     'role.cvo': 'Founder & Chief Visionary Officer (CVO)',
@@ -189,12 +192,15 @@ export const translations = {
     'blog.readmore': 'Read more',
     'blog.published': 'Published on',
     'blog.updated': 'Updated on',
+    'blog.noPosts': 'No posts available at the moment.',
     
     // WRITINGS
     'writings.title': 'Luis Satoshi\'s Writings',
     'writings.description': 'Reflections and writings from our founder',
     'writings.back': 'Back to Writings',
     'writings.readmore': 'Read more',
+    'writings.author': 'Author',
+    'writings.noWritings': 'No writings available at the moment.',
     
     // DONATE
     'donate.title': 'Support Our Mission',
