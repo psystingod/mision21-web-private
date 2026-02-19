@@ -12,7 +12,7 @@ import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   // Pon tu dominio real o placeholder
-  site: 'https://mision21.org',
+  site: 'https://www.mision21.org',
 
   integrations: [mdx(), sitemap(), react(), // 2. Añadir Keystatic aquí
   keystatic(), markdoc()],
